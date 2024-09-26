@@ -1,3 +1,4 @@
 .venv/
         version
 version
+__pycache__
