@@ -175,6 +175,13 @@ def a():
     return 'без слеша'
 
 @app.route('/lab2/a/')
-def a():
+def asl():
     return 'со слешем'
 
+flower_list = ('роза', 'тюлбпан', 'хризонтема', 'астра')
+@app.route('/lab2/flowers/<int:flower_id>')
+def flowers(flower_id):
+    if flower_id >= len(flower_list):
+        return 'нет такого цветка', 404
+    else:
+        return "цветок: " + flower_list[flower_id]
