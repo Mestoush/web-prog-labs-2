@@ -169,3 +169,12 @@ def s7air():
 </body>
 </html>
 '''
+
+@app.route('/lab2/a')
+def a():
+    return 'без слеша'
+
+@app.route('/lab2/a/')
+def a():
+    return 'со слешем'
+
