@@ -178,10 +178,30 @@ def a():
 def asl():
     return 'со слешем'
 
-flower_list = ('роза', 'тюлбпан', 'хризонтема', 'астра')
+flower_list = ['роза', 'тюлбпан', 'хризонтема', 'астра']
 @app.route('/lab2/flowers/<int:flower_id>')
 def flowers(flower_id):
     if flower_id >= len(flower_list):
         return 'нет такого цветка', 404
     else:
         return "цветок: " + flower_list[flower_id]
+    
+@app.route('/lab2/add_flower/<name>')
+def add_flower(name):
+    flower_list.append(name)
+    return f'''
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Цветок {name}</title>
+        </head>
+        <body>
+            <h1>Добавлен новый цветок</h1>
+            <p>Название нового цветка: {name}</p>
+            <p>Всего цветов: {len(flower_list)}</p>
+            <p>Полный список: {flower_list}</p>  
+        </body>
+        </html>
+'''
