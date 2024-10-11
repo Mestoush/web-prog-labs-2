@@ -325,5 +325,18 @@ def default_calc():
 def calc_with_default_b(a):
     return redirect(f'/lab2/calc/{a}/1')
 
-
+@app.route('/lab2/books')
+def books():
+    books = [
+        {'author': 'Майк Омер', 'title': 'Внутри убийцы', 'genre': 'Детективный роман', 'pages': 416},
+        {'author': 'Майк Омер', 'title': 'Заживо в темноте', 'genre': 'Детективный роман', 'pages': 448},
+        {'author': 'Майк Омер', 'title': 'Глазами жертвы', 'genre': 'Детективный роман', 'pages': 328},
+        {'author': 'Джексон Холли', 'title': 'Хороших девочек не убивают', 'genre': 'Детектив', 'pages': 398},
+        {'author': 'Джексон Холли', 'title': 'Хорошая девочка, дурная кровь', 'genre': 'Детектив', 'pages': 208},
+        {'author': 'Джексон Холли', 'title': 'Хорошая девочка должна умереть', 'genre': 'Детектив', 'pages': 448},
+        {'author': 'Роулинг Дж.К.', 'title': 'Гарри Поттер и философский камень', 'genre': 'Фэнтези', 'pages': 320},
+        {'author': 'Толстой Л.Н.', 'title': 'Война и мир', 'genre': 'Роман', 'pages': 1225},
+        {'author': 'Достоевский Ф.М.', 'title': 'Преступление и наказание', 'genre': 'Роман', 'pages': 671},
+    ]
+    return render_template('books.html', books=books)
 
