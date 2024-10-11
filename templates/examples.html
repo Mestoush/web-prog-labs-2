@@ -8,17 +8,38 @@
 </head>
 <body>
     <div class="main">
-        <header>WEB программирование, часть 2. Лабораторная работа {{lab_number}}</header>
+        <header>WEB программирование, часть 2. {% if lab_number %} Лабораторная работа {{lab_number}} {% endif %}</header>
         <main>
             <p>5 + 2 = {{5 + 2}}</p>
             <p>11*28 = {{11*28}}</p>
             <p>3258 - 759 = {{3258 - 759}}</p>
             <p>8452/793 = {{8452/793}}</p>
             <p>45<sup>8</sup> = {{45 ** 8}}</p>
+            <ul>
+                {% for f in fruits  %}
+                <li>{{ loop.index }} - {{ f.name }} : {{f.price}}&#8381;</li>
+                {% endfor %}
+            </ul>
         </main>
         <footer> 
             <hr>
-            &copy; {{name}}, {{group}}, курс {{course}}, 2024
+            &copy; 
+            {% if name %}
+                {{name}},
+            {% else %}
+                Анонимус
+            {% endif %}
+            {% if group %}
+                {{group}},
+            {% else %}
+                АБВ-00
+            {% endif %}
+            курс {% if course %}
+                {{course}}
+            {% else %}
+                Отчислен
+            {% endif %}
+            2024
         </footer>
     </div>   
 </body>
