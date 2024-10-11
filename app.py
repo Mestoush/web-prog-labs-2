@@ -179,15 +179,33 @@ def asl():
     return 'со слешем'
 
 flower_list = ['роза', 'тюлбпан', 'хризонтема', 'астра']
+
 @app.route('/lab2/flowers/<int:flower_id>')
 def flowers(flower_id):
     if flower_id >= len(flower_list):
         return 'нет такого цветка', 404
     else:
-        return "цветок: " + flower_list[flower_id]
+        return f'''
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Цветок {flower_list[flower_id]}</title>
+            </head>
+            <body>
+                <h1>Цветок: {flower_list[flower_id]}</h1>
+                <p>Порядковый номер цветка: {flower_id}</p>
+                <a href="/lab2/flowers">Посмотреть все цветы</a>
+            </body>
+            </html>
+        '''
     
+@app.route('/lab2/add_flower/', defaults={'name': None})
 @app.route('/lab2/add_flower/<name>')
 def add_flower(name):
+    if not name:
+        return 'вы не задали имя цветка', 400
     flower_list.append(name)
     return f'''
         <!DOCTYPE html>
@@ -201,10 +219,50 @@ def add_flower(name):
             <h1>Добавлен новый цветок</h1>
             <p>Название нового цветка: {name}</p>
             <p>Всего цветов: {len(flower_list)}</p>
-            <p>Полный список: {flower_list}</p>  
+            <p>Полный список: {flower_list}</p>
+            <a href="/lab2/flowers">Посмотреть все цветы</a>
         </body>
         </html>
-'''
+    '''
+
+# роут для вывода всех цветков
+@app.route('/lab2/flowers')
+def all_flowers():
+    flowers_html = ''.join(f'<li>{flower}</li>' for flower in flower_list)
+    return f'''
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Все цветы</title>
+        </head>
+        <body>
+            <h1>Список всех цветов</h1>
+            <p>Всего цветов: {len(flower_list)}</p>
+            <ul>{flowers_html}</ul>
+            <a href="/lab2/clear_flowers">Очистить список цветов</a>
+        </body>
+        </html>
+    '''
+
+@app.route('/lab2/clear_flowers')
+def clear_flowers():
+    flower_list.clear()
+    return f'''
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Цветы очищены</title>
+        </head>
+        <body>ч 
+            <h1>Список цветов был очищен</h1>
+            <a href="/lab2/flowers">Посмотреть все цветы</a>
+        </body>
+        </html>
+    '''
 
 @app.route('/lab2/example')
 def example():
@@ -228,3 +286,44 @@ def lab2():
 def filres():
     phrase = '0 <b>сколько</b> <u>нам</u> <i>открытий</i> чудных...'
     return render_template('filter.html', phrase = phrase)
+
+@app.route('/lab2/calc/<int:a>/<int:b>')
+def calc(a, b):
+    try:
+        sum_result = a + b
+        sub_result = a - b
+        mul_result = a * b
+        div_result = a / b if b != 0 else 'деление на 0 невозможно'
+        pow_result = a ** b
+    except Exception as e:
+        return f'Ошибка: {str(e)}'
+
+    return f'''
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Калькулятор</title>
+        </head>
+        <body>
+            <h1>Результаты операций с числами {a} и {b}</h1>
+            <p>Сумма: {sum_result}</p>
+            <p>Разность: {sub_result}</p>
+            <p>Произведение: {mul_result}</p>
+            <p>Деление: {div_result}</p>
+            <p>Возведение в степень: {pow_result}</p>
+        </body>
+        </html>
+    '''
+
+@app.route('/lab2/calc/')
+def default_calc():
+    return redirect('/lab2/calc/1/1')
+
+@app.route('/lab2/calc/<int:a>')
+def calc_with_default_b(a):
+    return redirect(f'/lab2/calc/{a}/1')
+
+
+
