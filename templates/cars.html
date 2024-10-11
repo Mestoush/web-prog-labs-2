@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{# номер лабораторной работы: #}
+{% block lab %} Лабораторная работа 2 {% endblock %}
+
+{# подключение дополнительных стилей: #}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='cars.css') }}">
+{% endblock %}
+
+{# основной контент: #}
+{% block main %} 
+    <h1>Список машин</h1>
+    <div class="car-list">
+        {% for car in cars %}
+        <div class="car">
+            <img src="{{ url_for('static', filename='images/' + car.image) }}">
+            <h2>{{ car.name }}</h2>
+            <p>{{ car.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
