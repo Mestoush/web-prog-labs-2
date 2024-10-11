@@ -73,6 +73,7 @@ def lab1():
             <li><a href="/lab1/oak" target="_blank">Дуб</a></li>
             <li><a href="/lab1/python" target="_blank">Python</a></li>
             <li><a href="/lab1/s7air" target="_blank">S7 Airlines</a></li>
+            <li><a href="/lab2" target="_blank">Меню второй лабораторной</a></li>
         </ul>
     </nav>
 

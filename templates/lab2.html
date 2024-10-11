@@ -8,9 +8,17 @@
     <h1>Шаблоны</h1>
     <div>тема лабораторной работы - шаблоны. Список сделанных страниц:
         <ol>
-            <li>
-                <a href="/lab2/example">example</a>
-            </li>
+            <li><a href="/lab2/example">example</a></li>
+            <li><a href="{{ url_for('a') }}">Нет слеша</a></li>
+            <li><a href="{{ url_for('asl') }}">Есть слеш</a></li>
+            <li><a href="{{ url_for('filres') }}">фильтры на текст</a></li>
+            <li><a href="{{ url_for('add_flower', name='роза') }}">Добавить цветок "Роза"</a></li>
+            <li><a href="{{ url_for('flowers', flower_id=3) }}">Показать цветок по ID (пример ID: 3)</a></li>
+            <li><a href="{{ url_for('all_flowers') }}">Показать все цветы</a></li>
+            <li><a href="{{ url_for('clear_flowers') }}">Очистить список цветов</a></li>
+            <li><a href="{{ url_for('calc', a=32, b=12) }}">Калькулятор</a></li>
+            <li><a href="{{ url_for('books') }}">Таблица с книгами</a></li>
+            <li><a href="{{ url_for('show_cars') }}">Список машин</a></li>
         </ol>
     </div>
 {% endblock %}

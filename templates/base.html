@@ -9,8 +9,13 @@
 </head>
 <body>
     <div class="main">
-        <header>WEB программирование, часть 2. {{ self.lab() }}</header>
+        <header>
+            WEB программирование, часть 2. {{ self.lab() }}
+        </header>
         <main>
+            <nav>
+                <a href="{{ url_for('lab2') }}">Главное меню</a>
+            </nav>
             {% block main %} {% endblock %}
         </main>
         <footer> 
