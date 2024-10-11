@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template, request
 app = Flask(__name__)
 
 @app.route('/')
@@ -179,91 +179,46 @@ def a():
 def asl():
     return 'со слешем'
 
-flower_list = ['роза', 'тюлбпан', 'хризонтема', 'астра']
+flower_list = [
+    {'name': 'роза', 'price': 100},
+    {'name': 'тюльпан', 'price': 50},
+    {'name': 'хризантема', 'price': 70},
+    {'name': 'астра', 'price': 60}
+]
+
 
 @app.route('/lab2/flowers/<int:flower_id>')
 def flowers(flower_id):
     if flower_id >= len(flower_list):
         return 'нет такого цветка', 404
-    else:
-        return f'''
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Цветок {flower_list[flower_id]}</title>
-            </head>
-            <body>
-                <h1>Цветок: {flower_list[flower_id]}</h1>
-                <p>Порядковый номер цветка: {flower_id}</p>
-                <a href="/lab2/flowers">Посмотреть все цветы</a>
-            </body>
-            </html>
-        '''
-    
-@app.route('/lab2/add_flower/', defaults={'name': None})
-@app.route('/lab2/add_flower/<name>')
-def add_flower(name):
-    if not name:
-        return 'вы не задали имя цветка', 400
-    flower_list.append(name)
-    return f'''
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Цветок {name}</title>
-        </head>
-        <body>
-            <h1>Добавлен новый цветок</h1>
-            <p>Название нового цветка: {name}</p>
-            <p>Всего цветов: {len(flower_list)}</p>
-            <p>Полный список: {flower_list}</p>
-            <a href="/lab2/flowers">Посмотреть все цветы</a>
-        </body>
-        </html>
-    '''
+    flower = flower_list[flower_id]
+    return render_template('flower.html', flower_name=flower['name'], flower_price=flower['price'], flower_id=flower_id)
 
-# роут для вывода всех цветков
+    
+@app.route('/lab2/add_flower', methods=['POST'])
+def add_flower():
+    flower_name = request.form['flower_name']
+    flower_price = int(request.form['flower_price'])
+    flower_list.append({'name': flower_name, 'price': flower_price})
+    return redirect(url_for('all_flowers'))
+
+
 @app.route('/lab2/flowers')
 def all_flowers():
-    flowers_html = ''.join(f'<li>{flower}</li>' for flower in flower_list)
-    return f'''
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Все цветы</title>
-        </head>
-        <body>
-            <h1>Список всех цветов</h1>
-            <p>Всего цветов: {len(flower_list)}</p>
-            <ul>{flowers_html}</ul>
-            <a href="/lab2/clear_flowers">Очистить список цветов</a>
-        </body>
-        </html>
-    '''
+    return render_template('all_flowers.html', flowers=flower_list, total_flowers=len(flower_list))
 
 @app.route('/lab2/clear_flowers')
 def clear_flowers():
     flower_list.clear()
-    return f'''
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Цветы очищены</title>
-        </head>
-        <body>ч 
-            <h1>Список цветов был очищен</h1>
-            <a href="/lab2/flowers">Посмотреть все цветы</a>
-        </body>
-        </html>
-    '''
+    return redirect(url_for('all_flowers'))
+
+@app.route('/lab2/delete_flowers/<int:flower_id>')
+def delete_flower(flower_id):
+    if flower_id >= len(flower_list):
+        return 'нет такого цветка', 404
+    del flower_list[flower_id]
+    return redirect(url_for('all_flowers'))
+
 
 @app.route('/lab2/example')
 def example():

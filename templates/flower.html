@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{# номер лабораторной работы: #}
+{% block lab %} Лабораторная работа 2. Отображение цветка {% endblock %}
+
+{# основной контент: #}
+{% block main %}
+    <h1>Цветок: {{ flower_name }}</h1>
+    <p>Порядковый номер цветка: {{ flower_id }}</p>
+    <p>Цена: {{ flower_price }} руб.</p>
+    <a href="{{ url_for('all_flowers') }}">Посмотреть все цветы</a>
+{% endblock %}
