@@ -1,18 +1,32 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block lab %} Лабораторная работа 3 {% endblock %}
+{% block lab %} Лабораторная работа 3{% endblock %}
 
-{% block main %} 
+{% block main %}
+
     <h1>Cookies</h1>
-    <form method="post">  
+    <form>
         <div>
-            <label for="color">Выберите цвет:</label>
-            <input type="color" id="color" name="color" value="{{ color }}">
+            <label class="label" for="color">Выберите цвет текста:</label>
+            <input type="color" id="color" name="color" value="{{ color or '' }}">
         </div>
+        <div>
+            <label class="label" for="background">Выберите цвет фона:</label>
+            <input type="color" id="background" name="background" value="{{ background or '' }}">
+        </div>
+        <div>
+            <label class="label" for="font_size">Выберите размер шрифта (px):</label>
+            <input type="number" id="font_size" name="font_size" value="{{ font_size or '' }}" min="10" max="50">
+        </div>
+        <div>
+            <label class="label" for="header_footer_color">Выберите цвет фона для header и footer:</label>
+            <input type="color" id="header_footer_color" name="header_footer_color" value="{{ header_footer_color or '' }}">
+        </div>
+        
         <div>
             <button type="submit">Подтвердить</button>
-        </div>
+        </div> 
+
     </form>
-    
-    <p>Текущие куки: {{ request.cookies }}</p>  
+
 {% endblock %}

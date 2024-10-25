@@ -72,15 +72,29 @@ def pay_success():
     return render_template('lab3/pay_success.html', price=price, card=card, name=name, cvv=cvv)
 
 
-@lab3.route('/lab3/settings', methods=['GET', 'POST']) 
+@lab3.route('/lab3/settings')
 def settings():
     color = request.args.get('color')
-    if color:
-        resp = make_response(redirect('lab3/settings'))
-        print(f"Setting cookie: {color}")  # Добавьте это перед resp.set_cookie
-        resp.set_cookie('color', color)
+    background = request.args.get('background')
+    font_size = request.args.get('font_size')
+    header_footer_color = request.args.get('header_footer_color')  # Новое поле
+
+    if color or background or font_size or header_footer_color:
+        resp = make_response(redirect('/lab3/settings'))
+        if color:
+            resp.set_cookie('color', color)
+        if background:
+            resp.set_cookie('background', background)
+        if font_size:
+            resp.set_cookie('font_size', font_size)
+        if header_footer_color:
+            resp.set_cookie('header_footer_color', header_footer_color) 
         return resp
-    
+
     color = request.cookies.get('color')
-    resp = render_template('lab3/settings.html', color=color)
+    background = request.cookies.get('background')
+    font_size = request.cookies.get('font_size')
+    header_footer_color = request.cookies.get('header_footer_color')
+
+    resp = make_response(render_template('lab3/settings.html', color=color, background=background, font_size=font_size, header_footer_color=header_footer_color))
     return resp
