@@ -5,7 +5,7 @@
 {% block main %}
 
     <h1>Cookies</h1>
-    <form>
+    <form method="get" action="/lab3/settings">
         <div>
             <label class="label" for="color">Выберите цвет текста:</label>
             <input type="color" id="color" name="color" value="{{ color or '' }}">
@@ -26,7 +26,12 @@
         <div>
             <button type="submit">Подтвердить</button>
         </div> 
+    </form>
 
+    <form method="get" action="/lab3/clear_cookies">
+        <div>
+            <button type="submit">Удалить все куки</button>
+        </div>
     </form>
 
 {% endblock %}

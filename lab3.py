@@ -99,6 +99,15 @@ def settings():
     resp = make_response(render_template('lab3/settings.html', color=color, background=background, font_size=font_size, header_footer_color=header_footer_color))
     return resp
 
+@lab3.route('/lab3/clear_cookies')
+def clear_cookies():
+    resp = make_response(redirect('/lab3/settings'))
+    resp.delete_cookie('color')
+    resp.delete_cookie('background')
+    resp.delete_cookie('font_size')
+    resp.delete_cookie('header_footer_color')
+    return resp
+
 
 @lab3.route('/lab3/ticket', methods=['GET', 'POST'])
 def ticket():
