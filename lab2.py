@@ -1,13 +1,16 @@
 from flask import Blueprint, redirect, render_template, url_for, request
 lab2 = Blueprint('lab2', __name__)
 
+
 @lab2.route('/lab2/a')
 def a():
     return 'без слеша'
 
+
 @lab2.route('/lab2/a/')
 def asl():
     return 'со слешем'
+
 
 flower_list = [
     {'name': 'роза', 'price': 100},
@@ -37,10 +40,12 @@ def add_flower():
 def all_flowers():
     return render_template('all_flowers.html', flowers=flower_list, total_flowers=len(flower_list))
 
+
 @lab2.route('/lab2/clear_flowers')
 def clear_flowers():
     flower_list.clear()
     return redirect(url_for('all_flowers'))
+
 
 @lab2.route('/lab2/delete_flowers/<int:flower_id>')
 def delete_flower(flower_id):
@@ -64,9 +69,11 @@ def example():
         {'name' : 'манго', 'price' : 431}]
     return render_template('examples.html', name = name, lab_number = lab_number, group = group, course = course, fruits = fruits)
 
+
 @lab2.route('/lab2')
 def lab2():
     return render_template('lab2.html')
+
 
 @lab2.route('/lab2/filtres')
 def filres():
