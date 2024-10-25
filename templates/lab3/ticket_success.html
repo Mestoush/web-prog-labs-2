@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block lab %} Успешная оплата билета{% endblock %}
+
+{% block main %}
+    <h1>Железнодорожный билет</h1>
+    <p><strong>ФИО пассажира:</strong> {{ name }}</p>
+    <p><strong>Возраст:</strong> {{ age }} ({{ ticket_type }})</p>
+    <p><strong>Полка:</strong> {{ polka }}</p>
+    <p><strong>Пункт выезда:</strong> {{ departure }}</p>
+    <p><strong>Пункт назначения:</strong> {{ destination }}</p>
+    <p><strong>Дата поездки:</strong> {{ date }}</p>
+    <p><strong>Стоимость билета:</strong> {{ price }} руб.</p>
+
+{% endblock %}

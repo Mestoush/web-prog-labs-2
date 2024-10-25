@@ -98,3 +98,39 @@ def settings():
 
     resp = make_response(render_template('lab3/settings.html', color=color, background=background, font_size=font_size, header_footer_color=header_footer_color))
     return resp
+
+
+@lab3.route('/lab3/ticket', methods=['GET', 'POST'])
+def ticket():
+    return render_template('lab3/ticket.html')
+
+@lab3.route('/lab3/ticket_result', methods=['POST'])
+def ticket_result():
+    name = request.form['name']
+    polka = request.form['polka']
+    age = int(request.form['age'])
+    departure = request.form['departure']
+    destination = request.form['destination']
+    date = request.form['date']
+    
+    free = 'linen' in request.form
+    baggage = 'baggage' in request.form
+    insurance = 'insurance' in request.form
+
+    if age < 18:
+        price = 700
+        ticket_type = "Детский билет"
+    else:
+        price = 1000
+        ticket_type = "Взрослый билет"
+    
+    if polka in ['нижняя', 'нижняя боковая']:
+        price += 100
+    if free:
+        price += 75
+    if baggage:
+        price += 250
+    if insurance:
+        price += 150
+
+    return render_template('lab3/ticket_success.html', name=name, polka=polka, age=age, departure=departure, destination=destination, date=date, ticket_type=ticket_type, price=price)
