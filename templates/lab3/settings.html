@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block lab %} Лабораторная работа 3 {% endblock %}
+
+{% block main %} 
+    <h1>Cookies</h1>
+    <form method="post">  
+        <div>
+            <label for="color">Выберите цвет:</label>
+            <input type="color" id="color" name="color" value="{{ color }}">
+        </div>
+        <div>
+            <button type="submit">Подтвердить</button>
+        </div>
+    </form>
+    
+    <p>Текущие куки: {{ request.cookies }}</p>  
+{% endblock %}
