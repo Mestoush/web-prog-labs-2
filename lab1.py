@@ -11,7 +11,7 @@ def lab():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Червоняк Денис Павлович, лабораторная 1</title>
-    <link rel="stylesheet" href="../static/lab1.css">
+    <link rel="stylesheet" href="../static/lab1/lab1.css">
 </head>
 <body>
     <header>
@@ -57,11 +57,11 @@ def oak():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oak</title>
-    <link rel="stylesheet" href="../static/lab1.css">
+    <link rel="stylesheet" href="../static/lab1/lab1.css">
 </head>
 <body>
     <h1>Дуб</h1>
-    <img class='oak' src="''' + url_for('static', filename='oak.jpeg') + '''" alt="" srcset="">
+    <img class='oak' src="''' + url_for('static', filename='/lab1/oak.jpeg') + '''" alt="" srcset="">
 </body>
 </html>
 '''
@@ -76,11 +76,11 @@ def student():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oak</title>
-    <link rel="stylesheet" href="../static/lab1.css">
+    <link rel="stylesheet" href="../static/lab1/lab1.css">
 </head>
 <body>
     <h1>Червоняк Денис Павлович</h1>
-    <img class='nstu' src="''' + url_for('static', filename='logo.png') + '''" alt="" srcset="">
+    <img class='nstu' src="''' + url_for('static', filename='/lab1/logo.png') + '''" alt="" srcset="">
 </body>
 </html>
 '''
@@ -95,7 +95,7 @@ def python():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>python</title>
-    <link rel="stylesheet" href="../static/lab1.css">
+    <link rel="stylesheet" href="../static/lab1/lab1.css">
 </head>
 <body>
     <h1>Язык программирования python</h1>
@@ -105,7 +105,7 @@ def python():
         <p>
         Python является мультипарадигменным языком программирования, поддерживающим императивное, процедурное, структурное, объектно-ориентированное программирование[14], метапрограммирование[18], функциональное программирование[14] и асинхронное программирование[19]. Задачи обобщённого программирования решаются за счёт динамической типизации[20][21]. Аспектно-ориентированное программирование частично поддерживается через декораторы[22], более полноценная поддержка обеспечивается дополнительными фреймворками[23]. Такие методики как контрактное и логическое программирование можно реализовать с помощью библиотек или расширений[24]. Основные архитектурные черты — динамическая типизация, автоматическое управление памятью[14], полная интроспекция, механизм обработки исключений, поддержка многопоточных вычислений с глобальной блокировкой интерпретатора (GIL)[25], высокоуровневые структуры данных. Поддерживается разбиение программ на модули, которые, в свою очередь, могут объединяться в пакеты[26].
     </p>
-    <img class='python' src="''' + url_for('static', filename='images.jpeg') + '''" alt="" srcset="">
+    <img class='python' src="''' + url_for('static', filename='/lab1/images.jpeg') + '''" alt="" srcset="">
 </body>
 </html>
 '''
@@ -120,7 +120,7 @@ def s7air():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>S7 Airlines</title>
-    <link rel="stylesheet" href="../static/lab1.css">
+    <link rel="stylesheet" href="../static/lab1/lab1.css">
 </head>
 <body>
     <h1>Авиакомпания S7 Airlines</h1>
@@ -133,7 +133,7 @@ def s7air():
     <p>
         Маршрутная сеть авиакомпании выстроена на базе авиатранспортных узлов, расположенных в аэропортах Домодедово (Москва) и Толмачёво (Новосибирск), по состоянию на 2016 год охватывала 205 направлений и 181 город в 26 странах мира 
     </p>
-    <img src="''' + url_for('static', filename='s7.jpg') + '''" alt="" srcset="">
+    <img src="''' + url_for('static', filename='/lab1/s7.jpg') + '''" alt="" srcset="">
 </body>
 </html>
 '''

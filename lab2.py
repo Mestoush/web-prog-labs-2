@@ -25,7 +25,7 @@ def flowers(flower_id):
     if flower_id >= len(flower_list):
         return 'нет такого цветка', 404
     flower = flower_list[flower_id]
-    return render_template('flower.html', flower_name=flower['name'], flower_price=flower['price'], flower_id=flower_id)
+    return render_template('/lab2/flower.html', flower_name=flower['name'], flower_price=flower['price'], flower_id=flower_id)
 
     
 @lab2.route('/lab2/add_flower', methods=['POST'])
@@ -38,13 +38,13 @@ def add_flower():
 
 @lab2.route('/lab2/flowers')
 def all_flowers():
-    return render_template('all_flowers.html', flowers=flower_list, total_flowers=len(flower_list))
+    return render_template('/lab2/all_flowers.html', flowers=flower_list, total_flowers=len(flower_list))
 
 
 @lab2.route('/lab2/clear_flowers')
 def clear_flowers():
     flower_list.clear()
-    return redirect(url_for('all_flowers'))
+    return redirect(url_for('/lab2/all_flowers'))
 
 
 @lab2.route('/lab2/delete_flowers/<int:flower_id>')
@@ -52,7 +52,7 @@ def delete_flower(flower_id):
     if flower_id >= len(flower_list):
         return 'нет такого цветка', 404
     del flower_list[flower_id]
-    return redirect(url_for('all_flowers'))
+    return redirect(url_for('/lab2/all_flowers'))
 
 
 @lab2.route('/lab2/example')
@@ -67,18 +67,18 @@ def example():
         {'name' : 'бананы', 'price' : 235},
         {'name' : 'апельсины', 'price' : 526},
         {'name' : 'манго', 'price' : 431}]
-    return render_template('examples.html', name = name, lab_number = lab_number, group = group, course = course, fruits = fruits)
+    return render_template('/lab2/examples.html', name = name, lab_number = lab_number, group = group, course = course, fruits = fruits)
 
 
 @lab2.route('/lab2')
 def lab2_index():
-    return render_template('lab2.html')
+    return render_template('lab2/lab2.html')
 
 
 @lab2.route('/lab2/filtres')
 def filres():
     phrase = '0 <b>сколько</b> <u>нам</u> <i>открытий</i> чудных...'
-    return render_template('filter.html', phrase = phrase)
+    return render_template('lab2/filter.html', phrase = phrase)
 
 @lab2.route('/lab2/calc/<int:a>/<int:b>')
 def calc(a, b):
@@ -131,7 +131,7 @@ def books():
         {'author': 'Толстой Л.Н.', 'title': 'Война и мир', 'genre': 'Роман', 'pages': 1225},
         {'author': 'Достоевский Ф.М.', 'title': 'Преступление и наказание', 'genre': 'Роман', 'pages': 671},
     ]
-    return render_template('books.html', books=books)
+    return render_template('/lab2/books.html', books=books)
 
 
 @lab2.route('/lab2/cars')
@@ -143,4 +143,4 @@ def show_cars():
         {'name': 'Mercedes S-Class', 'description': 'Роскошные седан премиум-класса', 'image': 'mercedes_s_class.jpg'},
         {'name': 'KIA Sorento', 'description': 'Корейский внедорожник', 'image': 'sorento.jpg'}
     ]
-    return render_template('cars.html', cars=cars)
+    return render_template('/lab2/cars.html', cars=cars)
