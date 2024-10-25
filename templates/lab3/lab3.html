@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 
 {# номер лабораторной работы: #}
-{% block lab %} Лабораторная работа 2 {% endblock %}
+{% block lab %} Лабораторная работа 3 {% endblock %}
 
 {# основной контент: #}
 {% block main %} 
     <h1>Формы, cookie</h1>
+    <div>
+        Привет, <span style="color: {{name_color}}">{{ name }}</span>!
+    </div>
     <div>
         Список сделанных страниц:
     </div>

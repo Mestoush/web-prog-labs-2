@@ -11,6 +11,11 @@ app.register_blueprint(lab3)
 @app.route('/')
 
 
+@app.route('/index')
+def start():
+    return redirect("/menu", code=302)
+
+
 @app.route('/menu')
 def menu():
     return """

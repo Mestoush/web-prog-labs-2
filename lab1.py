@@ -1,10 +1,6 @@
 from flask import Blueprint, redirect, url_for, request
 lab1 = Blueprint('lab1', __name__)
 
-@lab1.route('/index')
-def start():
-
-    return redirect("/menu", code=302)
 
 @lab1.route('/lab1')
 def lab():
