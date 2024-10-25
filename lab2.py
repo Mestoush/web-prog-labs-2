@@ -32,7 +32,7 @@ def flowers(flower_id):
 def add_flower():
     flower_name = request.form['flower_name']
     flower_price = int(request.form['flower_price'])
-    flower_list.lab2end({'name': flower_name, 'price': flower_price})
+    flower_list.append({'name': flower_name, 'price': flower_price})
     return redirect(url_for('all_flowers'))
 
 
@@ -71,7 +71,7 @@ def example():
 
 
 @lab2.route('/lab2')
-def lab2():
+def lab2_index():
     return render_template('lab2.html')
 
 
