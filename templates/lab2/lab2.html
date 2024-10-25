@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{# номер лабораторной работы: #}
+{% block lab %} Лабораторная работа 2 {% endblock %}
+
+{# основной контент: #}
+{% block main %} 
+    <h1>Шаблоны</h1>
+    <div>тема лабораторной работы - шаблоны. Список сделанных страниц:
+        <ol>
+            <li><a href="/lab2/example">example</a></li>
+            <li><a href="{{ url_for('lab2.a') }}">Нет слеша</a></li>
+            <li><a href="{{ url_for('lab2.asl') }}">Есть слеш</a></li>
+            <li><a href="{{ url_for('lab2.filres') }}">фильтры на текст</a></li>
+            <li><a href="{{ url_for('lab2.add_flower', name='роза') }}">Добавить цветок "Роза"</a></li>
+            <li><a href="{{ url_for('lab2.flowers', flower_id=3) }}">Показать цветок по ID (пример ID: 3)</a></li>
+            <li><a href="{{ url_for('lab2.all_flowers') }}">Показать все цветы</a></li>
+            <li><a href="{{ url_for('lab2.clear_flowers') }}">Очистить список цветов</a></li>
+            <li><a href="{{ url_for('lab2.calc', a=32, b=12) }}">Калькулятор</a></li>
+            <li><a href="{{ url_for('lab2.books') }}">Таблица с книгами</a></li>
+            <li><a href="{{ url_for('lab2.show_cars') }}">Список машин</a></li>
+        </ol>
+    </div>
+{% endblock %}
