@@ -1,18 +1,16 @@
 {% extends 'base.html' %}
 
-{# номер лабораторной работы: #}
 {% block lab %} Лабораторная работа 4 {% endblock %}
 
-{# основной контент: #}
 {% block main %} 
     <h1>Формы (POST)</h1>
-    <div>
-        Тема лабораторной работы - Формы (POST)
-    </div>
-    <div>
-        Список сделанных страниц:
-    </div>
+    <div>Тема лабораторной работы - Формы (POST)</div>
+    <div>Список сделанных страниц:</div>
     <ol>
-        <li><a href="/lab4/div">Деление чисел</a></li>
+        <li><a href="{{ url_for('lab4.div') }}">Деление</a></li>
+        <li><a href="{{ url_for('lab4.add') }}">Суммирование</a></li>
+        <li><a href="{{ url_for('lab4.umnozh') }}">Умножение</a></li>
+        <li><a href="{{ url_for('lab4.minus') }}">Вычитание</a></li>
+        <li><a href="{{ url_for('lab4.stepen') }}">Возведение в степень</a></li>
     </ol>
 {% endblock %}

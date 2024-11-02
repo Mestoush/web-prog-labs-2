@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block lab %} Деление чисел {% endblock %}
+
+{% block main %} 
+    <h1>Возведение чисел в степень</h1>
+
+    <form action="{{ url_for('lab4.stepen') }}" method="post">
+        <input type="number" name="x1" placeholder="Введите первое число" required>
+        <input type="number" name="x2" placeholder="Введите второе число" required>
+        <button type="submit">Возвести в степень</button>
+    </form>
+
+    {% if error %}
+        <p>{{ error }}</p>
+    {% elif result is not none %}
+        <p>Число {{ x1 }} в степени {{ x2 }} = {{ result }}</p>
+    {% endif %}
+
+    <a href="{{ back_url }}">Назад</a>
+{% endblock %}

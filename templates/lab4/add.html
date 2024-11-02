@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block lab %} Деление чисел {% endblock %}
+
+{% block main %} 
+    <h1>Сложение чисел</h1>
+
+    <form action="{{ url_for('lab4.add') }}" method="post">
+        <input type="number" name="x1" placeholder="Введите первое число" required>
+        <input type="number" name="x2" placeholder="Введите второе число" required>
+        <button type="submit">Сложить</button>
+    </form>
+
+    {% if error %}
+        <p>{{ error }}</p>
+    {% elif result is not none %}
+        <p>Число {{ x1 }} плюс {{ x2 }} = {{ result }}</p>
+    {% endif %}
+
+    <a href="{{ back_url }}">Назад</a>
+{% endblock %}
