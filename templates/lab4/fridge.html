@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <h1>Установка температуры холодильника</h1>
+    <form method="post">
+        <label for="temperature">Температура (°С):</label>
+        <input type="text" id="temperature" name="temperature">
+        <button type="submit">Установить</button>
+    </form>
+    <div>{{ message }}</div>
+    <div>{{ snow }}</div>
+{% endblock %}
