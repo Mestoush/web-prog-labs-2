@@ -150,6 +150,12 @@ def login():
     return render_template('lab4/login.html', error=error, login=login)
 
 
+@lab4.route('/lab4/logout', methods = ['POST'])
+def logout():
+    session.pop('login', None)
+    return redirect('/lab4/login')
+
+
 @lab4.route('/lab4/fridge', methods=['GET', 'POST'])
 def fridge():
     temperature = request.form.get('temperature')
@@ -217,3 +223,72 @@ def order():
             message = "Ошибка: вес должен быть числом"
 
     return render_template('lab4/order.html', message=message, discount_message=discount_message)
+
+
+@lab4.route('/lab4/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        login = request.form.get('login')
+        password = request.form.get('password')
+        name = request.form.get('name')
+
+        if not login or not password or not name:
+            error = "Все поля обязательны для заполнения"
+            return render_template('register.html', error=error)
+
+        for user in users:
+            if user['login'] == login:
+                error = "Этот логин уже занят"
+                return render_template('register.html', error=error)
+
+        new_user = {'login': login, 'password': password, 'name': name, 'gender': 'не указан'}
+        users.append(new_user)
+        return redirect('/lab4/login')
+
+    return render_template('lab4/register.html')
+
+
+# отображение списка пользователей 
+@lab4.route('/lab4/users')
+def user_list():
+    if 'login' not in session:
+        return redirect('/lab4/login')
+
+    return render_template('lab4/user_list.html', users=users, current_user=session['login'])
+
+
+# удаление текущего пользователя из списка
+@lab4.route('/lab4/delete_user', methods=['POST'])
+def delete_user():
+    if 'login' not in session:
+        return redirect('/lab4/login')
+
+    login = session['login']
+    global users
+    users = [user for user in users if user['login'] != login]
+    session.pop('login', None)
+    return redirect('/lab4/login')
+
+
+# редактирование данных пользователя
+@lab4.route('/lab4/edit', methods=['GET', 'POST'])
+def edit_user():
+    if 'login' not in session:
+        return redirect('/lab4/login')
+
+    login = session['login']
+    user = next((user for user in users if user['login'] == login), None) # генератор перебора каждого значения user в списке users
+
+    if request.method == 'POST':
+        name = request.form.get('name')
+        password = request.form.get('password')
+
+        if not name or not password:
+            error = "Все поля обязательны для заполнения"
+            return render_template('lab4/edit_user.html', error=error, user=user)
+
+        user['name'] = name
+        user['password'] = password
+        return redirect('/lab4/users')
+
+    return render_template('lab4/edit_user.html', user=user)

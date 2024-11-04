@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <h1>Редактирование данных</h1>
+    <form method="post">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" value="{{ user.name }}"><br>
+
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" value="{{ user.password }}"><br>
+
+        <button type="submit">Сохранить изменения</button>
+        <div style="color: red;">{{ error }}</div>
+    </form>
+{% endblock %}
