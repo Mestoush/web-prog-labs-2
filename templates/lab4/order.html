@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <h1>Заказ зерна</h1>
+    <form method="post">
+        <label for="type">Тип зерна:</label>
+        <select id="type" name="type">
+            <option value="ячмень">Ячмень</option>
+            <option value="овёс">Овёс</option>
+            <option value="пшеница">Пшеница</option>
+            <option value="рожь">Рожь</option>
+        </select>
+        <label for="weight">Вес (т):</label>
+        <input type="text" id="weight" name="weight">
+        <button type="submit">Заказать</button>
+    </form>
+    <div>{{ message }}</div>
+    <div style="color: green;">{{ discount_message }}</div>
+{% endblock %}
