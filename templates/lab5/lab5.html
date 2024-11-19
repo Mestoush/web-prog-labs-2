@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block lab %} Лабораторная работа 5 {% endblock %}
+
+{% block main %} 
+    <h1>Формы (POST)</h1>
+    <div>Тема лабораторной работы - Flask и БД</div>
+    <div>Имя пользователя: {{ name }}</div>
+    <div>Список сделанных страниц:</div>
+    <ol>
+        <li><a href="{{ url_for('lab5.login') }}">Вход</a></li>
+        <li><a href="{{ url_for('lab5.register') }}">Регистрация</a></li>
+        <li><a href="{{ url_for('lab5.list') }}">Список статей</a></li>
+        <li><a href="{{ url_for('lab5.create') }}">Создать статью</a></li>
+    </ol>
+{% endblock %}
