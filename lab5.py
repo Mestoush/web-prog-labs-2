@@ -48,7 +48,10 @@ def login():
     
     conn, cur = db_connect()
 
-    cur.execute("SELECT * FROM users WHERE login=%s;", (login))
+    if current_app.config['DB_TYPE'] == 'postgres':
+        cur.execute("SELECT * FROM users WHERE login=%s;", (login,))
+    else:
+        cur.execute("SELECT * FROM users WHERE login=%s;", (login,))
     user = cur.fetchone()
 
     if not user:
@@ -108,9 +111,9 @@ def list():
     user_id = cur.fetchone()["id"]
     
     if current_app.config['DB_TYPE'] == 'postgres':
-        cur.execute("SELECT * FROM articles WHERE user_id=%s;", (user_id))
+        cur.execute("SELECT * FROM articles WHERE user_id=%s;", (user_id,))
     else:
-        cur.execute("SELECT * FROM articles WHERE user_id=?;", (user_id))
+        cur.execute("SELECT * FROM articles WHERE user_id=?;", (user_id,))
     articles = cur.fetchall()
 
     db_close(conn, cur)
