@@ -3,22 +3,29 @@
 {% block lab %} Лабораторная работа 5 {% endblock %}
 
 {% block main %}
-    <h1>Создание статьи</h1>
+<h1>Добавить статью</h1>
 
-    <form action="" method="post">
-        <div>
-            <label for="">
-                Название статьи:
-                <input type="text" name="title" id="" maxlength="50">
-            </label>
-        </div>
+<form method="post">
+    <div>
+        <label for="title">Заголовок:</label>
+        <input type="text" id="title" name="title">
+    </div>
 
-        <div>
-            <textarea name="article_text" id=""></textarea>
-        </div>
+    <div>
+        <label for="article_text">Текст статьи:</label>
+        <textarea id="article_text" name="article_text"></textarea>
+    </div>
 
-        <div>
-            <button type="submit">Готово</button>
-        </div>
-    </form>
+    <div>
+        <label for="is_favorite">Добавить в любимые статьи</label>
+        <input type="checkbox" id="is_favorite" name="is_favorite">
+    </div>
+
+    <div>
+        <label for="is_public">Сделать статью публичной</label>
+        <input type="checkbox" id="is_public" name="is_public">
+    </div>
+
+    <button type="submit">Добавить статью</button>
+</form>
 {% endblock %}
