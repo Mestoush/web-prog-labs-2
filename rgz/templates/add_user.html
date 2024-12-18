@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Список сотрудников{% endblock %}
+
+{% block styles %}
+<style>
+    .role {
+        padding: 10px;
+    }
+
+    h1 {
+        padding-bottom: 20px;
+    }
+
+    button {
+        margin-bottom: 50px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse; 
+        margin-top: 20px;
+        background-color: #f9f9f9;
+        margin-bottom: 10px;
+    }
+
+    thead {
+        background-color: #003366; 
+        color: white;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f2f2f2; 
+    }
+
+    tbody tr:hover {
+        background-color: #e0e0e0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <h1>Добавить нового пользователя</h1>
+
+    <form method="POST">
+        <div>
+            <label for="username">Логин:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        
+        <div>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        
+        <div class="role">
+            <label>Роль: Кадровик</label>
+        </div>
+        
+        <button type="submit">Создать пользователя</button>
+    </form>
+
+    <h2>Список всех пользователей</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Логин</th>
+                <th>Роль</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.username }}</td>
+                    <td>{{ employee.role }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/users">Вернуться к списку пользователей</a>
+{% endblock %}

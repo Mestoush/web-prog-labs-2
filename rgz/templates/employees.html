@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block title %}Список сотрудников{% endblock %}
+
+{% block styles %}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse; 
+        margin-top: 20px;
+        background-color: #f9f9f9;
+        margin-bottom: 10px;
+    }
+
+    thead {
+        background-color: #003366; 
+        color: white;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f2f2f2; 
+    }
+
+    tbody tr:hover {
+        background-color: #e0e0e0;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 2rem;
+        color: #003366; 
+        margin-bottom: 30px;
+    }
+
+    .showmore {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1.2rem;
+        color: #003366;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 25px;
+    }
+
+    .showmore:hover {
+        text-decoration: underline;
+    }
+
+    form {
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    form input[type="text"] {
+        width: 300px;
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+
+    form input[type="text"]:focus {
+        border-color: #007BFF;
+    }
+
+    form button {
+        margin-left: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #ebedee;
+        color: #003366;
+        border: 1px solid;
+        border-color: #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    form button:hover {
+        background-color: #0056b3;
+    }
+
+    form select {
+        width: 300px;
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease;
+        margin-left: 10px;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Список сотрудников</h1>
+
+<form method="get" action="/employees">
+    <input type="text" name="search" placeholder="ФИО сотрудника" value="{{ search }}">
+    <select name="sort_by">
+        {% for position in sorted %}
+        <option value="{{ position }}"> {{ position }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Искать</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th><a href="/employees?sort_by=name&search={{ search }}">ФИО</a></th>
+            <th><a href="/employees?sort_by=position&search={{ search }}">Должность</a></th>
+            <th><a href="/employees?sort_by=gender&search={{ search }}">Пол</a></th>
+            <th><a href="/employees?sort_by=phone&search={{ search }}">Телефон</a></th>
+            <th><a href="/employees?sort_by=email&search={{ search }}">Email</a></th>
+            <th><a href="/employees?sort_by=start_date&search={{ search }}">Дата устройства</a></th>
+            <th><a href="/employees?sort_by=probation_period&search={{ search }}">Пробный период</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.position }}</td>
+            <td>{{ employee.gender }}</td>
+            <td>{{ employee.phone }}</td>
+            <td>{{ employee.email }}</td>
+            <td>{{ employee.start_date }}</td>
+            <td>{{ employee.probation_period }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if page > 1 %}
+    <a class="showmore" href="/employees?page={{ page - 1 }}&search={{ search }}">Вернуться назад</a>
+{% endif %}
+
+{% if next_page %}
+    <a class="showmore"  href="/employees?page={{ next_page }}&search={{ search }}">Показать ещё</a>
+{% endif %}
+{% endblock %}

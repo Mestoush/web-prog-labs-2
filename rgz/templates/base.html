@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Главная{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <div class="main">
+        <header>
+            <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Логотип компании">
+            <div>
+                <nav>
+                    <a href="/">Главная</a>
+                    <a href="/employees">Список сотрудников</a>
+        
+                    {% if session.get('role') == 'Кадровик' %}
+                        <a href="/add_employee">Добавление сотрудника</a>
+                    {% elif session.get('role') == 'Администратор' %}
+                        <a href="/add_employee">Добавление сотрудника</a>
+                        <a href="/add_user">Добавить кадровика</a>
+                    {% endif %}
+                </nav>
+            </div>
+            {% if session.get('username') %}
+                <span>Добрый день, {{ session.get('username') }}</span>
+                <div class="auth-buttons">
+                    <a href="/logout">Выйти</a>
+                </div>
+            {% else %}
+                <div class="auth-buttons">
+                    <a href="/login">Войти</a>
+                </div>
+            {% endif %}
+        
+        </header>
+        
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        <footer>
+            &copy; Червоняк Денис, ФБИ-24, 2 курс, 2024
+        </footer>
+    </div>
+</body>
+</html>

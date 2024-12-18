@@ -1,0 +1,49 @@
+/* Общие стили для таблицы */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Убираем промежутки между ячейками */
+    margin-top: 20px;
+    background-color: #f9f9f9;
+}
+
+thead {
+    background-color: #003366; /* Темно-синий фон для шапки */
+    color: white;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Зебра для строк */
+}
+
+tbody tr:hover {
+    background-color: #e0e0e0; /* Подсветка при наведении */
+}
+
+/* Стилизация заголовка */
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #5f7d9b; /* Темно-синий цвет */
+    margin-bottom: 30px;
+}
+
+/* Ссылка "Показать ещё" */
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #003366;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
