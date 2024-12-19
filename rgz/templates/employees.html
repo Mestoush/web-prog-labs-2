@@ -127,6 +127,9 @@
             <th><a href="/employees?sort_by=email&search={{ search }}">Email</a></th>
             <th><a href="/employees?sort_by=start_date&search={{ search }}">Дата устройства</a></th>
             <th><a href="/employees?sort_by=probation_period&search={{ search }}">Пробный период</a></th>
+            {% if session.get('role') in ['Администратор', 'Кадровик'] %}
+                <th><a href="/employees?sort_by=probation_period&search={{ search }}">Редактирование</a></th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -139,6 +142,17 @@
             <td>{{ employee.email }}</td>
             <td>{{ employee.start_date }}</td>
             <td>{{ employee.probation_period }}</td>
+            <td>
+                {% if session.get('role') in ['Администратор', 'Кадровик'] %}
+                    <form method="GET" action="/edit_employee/{{ employee.id }}" style="display:inline;">
+                        <button type="submit">Редактировать</button>
+                    </form>
+
+                    <form method="POST" action="{{ url_for('delete_employee', employee_id=employee.id) }}" style="display:inline;">
+                        <button type="submit">Удалить</button>
+                    </form>
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </tbody>

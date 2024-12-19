@@ -23,7 +23,6 @@ def db_connect():
 def get_employees(page=1, per_page=20):
     conn, cur = db_connect()
     start = (page - 1) * per_page
-    end = start + per_page
     query = "SELECT * FROM employees ORDER BY id LIMIT %s OFFSET %s"
     cur.execute(query, (per_page, start))
     employees = cur.fetchall()
@@ -34,10 +33,7 @@ def get_employees(page=1, per_page=20):
 # Функция для добавления сотрудника
 def add_employee_to_db(name, position, gender, phone, email, start_date):
     conn, cur = db_connect()
-    query = """
-        INSERT INTO employees (name, position, gender, phone, email, start_date)
-        VALUES (%s, %s, %s, %s, %s, %s)
-    """
+    query = """INSERT INTO employees (name, position, gender, phone, email, start_date)VALUES (%s, %s, %s, %s, %s, %s)"""
     cur.execute(query, (name, position, gender, phone, email, start_date))
     conn.commit()
     cur.close()
@@ -131,6 +127,40 @@ def add_employee():
         return redirect(url_for("employees_list"))
 
     return render_template("add_employee.html")
+
+@app.route('/edit_employee/<int:employee_id>', methods=['GET', 'POST'])
+def edit_employee(employee_id):
+    conn, cur = db_connect()
+    
+    if request.method == 'POST':
+        name = request.form['name']
+        position = request.form['position']
+        probation_period = 'probation_period' in request.form
+
+        cur.execute("""UPDATE employees SET name = %s, position = %s, probation_period = %sWHERE id = %s""", (name, position, probation_period, employee_id))
+        conn.commit()
+
+        cur.close()
+        conn.close()
+        return redirect('/employees')
+    
+    cur.execute("SELECT * FROM employees WHERE id = %s", (employee_id,))
+    employee = cur.fetchone()
+    cur.close()
+    conn.close()
+    
+    return render_template('add_employee.html', employee=employee)
+
+
+@app.route('/delete_employee/<int:employee_id>', methods=['POST'])
+def delete_employee(employee_id):
+    conn, cur = db_connect()
+    cur.execute("DELETE FROM employees WHERE id = %s", (employee_id,))
+    conn.commit()
+    cur.close()
+    conn.close()
+    return redirect('/employees')
+
 
 @app.route("/add_user", methods=["GET", "POST"])
 def add_user():
