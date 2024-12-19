@@ -8,7 +8,6 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'секретно-секретный секрет')
 
-# Функция подключения к базе данных
 def db_connect():
     conn = psycopg2.connect(
         host='127.0.0.1',
@@ -19,7 +18,6 @@ def db_connect():
     cur = conn.cursor(cursor_factory=RealDictCursor)
     return conn, cur
 
-# Функция для получения списка сотрудников
 def get_employees(page=1, per_page=20):
     conn, cur = db_connect()
     start = (page - 1) * per_page
@@ -30,7 +28,6 @@ def get_employees(page=1, per_page=20):
     conn.close()
     return employees
 
-# Функция для добавления сотрудника
 def add_employee_to_db(name, position, gender, phone, email, start_date):
     conn, cur = db_connect()
     query = """INSERT INTO employees (name, position, gender, phone, email, start_date)VALUES (%s, %s, %s, %s, %s, %s)"""
@@ -39,13 +36,11 @@ def add_employee_to_db(name, position, gender, phone, email, start_date):
     cur.close()
     conn.close()
 
-# Главная страница
 @app.route("/")
 def index():
     username = session.get('username')
     return render_template("index.html", username = username)
 
-# Страница списка сотрудников
 @app.route("/employees", methods=["GET", "POST"])
 def employees_list():
     page = int(request.args.get("page", 1))
@@ -76,7 +71,6 @@ def employees_list():
     conn.close()
     return render_template("employees.html", employees=employees_for_page, next_page=next_page, user_authenticated=True, page=page, search=search, sorted = sorted)
 
-# Страница авторизации
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":

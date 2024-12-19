@@ -27,7 +27,7 @@ header, footer {
 }
 
 header {
-    position: fixed; /* Фиксированное позиционирование */
+    position: fixed; 
     top: 0;
     left: 0;
 }
@@ -118,7 +118,7 @@ a:hover {
 
 /* Кнопки */
 button, a.button {
-    background-color: #d7dde5; /* Светло-серый с голубым оттенком */
+    background-color: #d7dde5; 
     color: #333;
     padding: 10px 20px;
     border: none;
