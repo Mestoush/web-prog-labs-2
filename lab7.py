@@ -54,20 +54,33 @@ def del_film():
     del films[id]
     return "", 204
 
-@lab7.route('/lab7/rest-api/films/<int:id>', methods = ['PUT'])
-def put_film(id):
-    if id < 0 or id >= len(films):
-        abort(404)
-    film = request.get_json()
-    if film['description'] == '':
-        return {'description': 'Заполните описание'}, 400
-    films[id] = film
-    return films[id]
-
 @lab7.route('/lab7/rest-api/films/', methods=['POST'])
 def add_film():
     film = request.get_json()
     if 'description' not in film or not film['description'].strip():
         return {'description': 'Заполните описание'}, 400
+    if not film.get('title'):
+        film['title'] = film.get('title_ru', '').strip()
+    if not film.get('title_ru'):
+        film['title_ru'] = film.get('title', '').strip()
     films.append(film)
+    print(films)
     return films[-1], 201
+
+
+@lab7.route('/lab7/rest-api/films/<int:id>', methods=['PUT'])
+def put_film(id):
+    if id < 0 or id >= len(films):
+        abort(404)
+
+    film = request.get_json()
+    if 'description' not in film or not film['description'].strip():
+        return {'description': 'Заполните описание'}, 400
+    if not film.get('title'):
+        film['title'] = film.get('title_ru', '').strip()
+    if not film.get('title_ru'):
+        film['title_ru'] = film.get('title', '').strip()
+    films[id] = film
+    return films[id]
+
+
