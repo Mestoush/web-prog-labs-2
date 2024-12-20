@@ -47,3 +47,49 @@ function deleteFilm(id, title) {
             fillFilmList();
         });
 }
+
+function showModal() {
+    document.querySelector('div.modal').style.display = 'block';
+    document.getElementById('description-error').innerText = '';
+    document.getElementById('title-error').innerText = '';
+    document.getElementById('title_ru-error').innerText = '';
+    document.getElementById('year-error').innerText = '';
+}
+
+function hideModal() {
+    document.querySelector('div.modal').style.display = 'none'
+}
+
+function cancel() {
+    hideModal();
+}
+
+function addFilm() {
+    document.getElementById('id').value = '';
+    document.getElementById('title').value = '';
+    document.getElementById('title_ru').value = '';
+    document.getElementById('year').value = '';
+    document.getElementById('description').value = '';
+    showModal();
+}
+
+function sendFilm() {
+    const id = document.getElementById('id').value;
+    const film = {
+        title: document.getElementById('title').value,
+        title_ru: document.getElementById('title_ru').value,
+        year: document.getElementById('year').value,
+        description: document.getElementById('description').value,
+    }
+    const url = `/lab7/rest-api/films/${id}`;
+    const method = id === '' ? 'POST' : 'PUT';
+    fetch(url, {
+        method: method,
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(film)
+    })
+    .then(function() {
+        fillFilmList();
+        hideModal();
+    })
+}

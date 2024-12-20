@@ -8,7 +8,19 @@
 
 {% block styles %}
 <style>
-
+    .modal {
+        display: none;
+        z-index: 100;
+        box-shadow: 3px 3px 5px rgb(46, 0, 0);
+        background: whitesmoke;
+        width: 400px;
+        left: 50%;
+        top: 220px;
+        margin-left: -200px;
+        position: absolute;
+        padding: 20px;
+        font-weight: bold;
+    }
 </style>
 {% endblock %}
 
@@ -33,6 +45,32 @@
 
 <div>
     <button onclick="addFilm()">Добавить фильм</button>
+</div>
+<div class = "modal">
+    <input type = "hidden" id="id">
+    <label>
+        Название фильма на русском:
+        <input type="text" id="title_ru">
+        <div id="title_ru-error" class="error-message"></div>
+    </label> <br>
+    <label>
+        Название фильма на оригинальном языке
+        <i>(если фильм русский, оставьте поле пустым):</i>
+        <input type="text" id="title">
+        <div id="title-error" class = "error-message"></div>
+    </label> <br>
+    <label>
+        Год выпуска:
+        <input type="number" id="year">
+        <div id="year-error" class = "error-message"></div>
+    </label> <br>
+    <label>
+        Описание:
+        <textarea id="description"></textarea>
+        <div id="description-error" class = "error-message"></div>
+    </label> <br>
+    <button onclick="sendFilm()"> ОК </button>
+    <button onclick="cancel()">Отмена</button>
 </div>
 
 {% endblock %}
