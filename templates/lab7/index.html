@@ -92,8 +92,7 @@
 </style>
 {% endblock %}
 
-{% block main %} 
-
+{% block main %}
 <h1>Список фильмов</h1>
 
 <table>
@@ -114,8 +113,9 @@
 <div>
     <button onclick="addFilm()">Добавить фильм</button>
 </div>
-<div class = "modal">
-    <input type = "hidden" id="id">
+
+<div class="modal">
+    <input type="hidden" id="id">
     <label>
         Название фильма на русском:
         <input type="text" id="title_ru">
@@ -125,17 +125,17 @@
         Название фильма на оригинальном языке
         <i>(если фильм русский, оставьте поле пустым):</i>
         <input type="text" id="title">
-        <div id="title-error" class = "error-message"></div>
+        <div id="title-error" class="error-message"></div>
     </label> <br>
     <label>
         Год выпуска:
         <input type="number" id="year">
-        <div id="year-error" class = "error-message"></div>
+        <div id="year-error" class="error-message"></div>
     </label> <br>
     <label>
         Описание:
         <textarea id="description"></textarea>
-        <div id="description-error" class = "error-message"></div>
+        <div id="description-error" class="error-message"></div>
     </label> <br>
     <button onclick="sendFilm()"> ОК </button>
     <button onclick="cancel()">Отмена</button>
