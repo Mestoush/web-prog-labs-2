@@ -42,6 +42,20 @@
     tbody tr:hover {
         background-color: #e0e0e0;
     }
+
+    .showmore {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1.2rem;
+        color: #003366;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 25px;
+    }
+
+    .showmore:hover {
+        text-decoration: underline;
+    }
 </style>
 {% endblock %}
 
@@ -75,14 +89,14 @@
             </tr>
         </thead>
         <tbody>
-            {% for employee in employees %}
+            {% for user in users %}
                 <tr>
-                    <td>{{ employee.username }}</td>
-                    <td>{{ employee.role }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.role }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <a href="/users">Вернуться к списку пользователей</a>
+    <a class="showmore" href="/employees">Вернуться к списку пользователей</a>
 {% endblock %}

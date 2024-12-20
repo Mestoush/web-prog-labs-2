@@ -6,33 +6,13 @@ from werkzeug.security import check_password_hash, generate_password_hash
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'секретно-секретный секрет')
 
-# Функция подключения к SQLite3
 def db_connect():
-    conn = sqlite3.connect('database.db')
-    conn.row_factory = sqlite3.Row  
+    conn = sqlite3.connect('web-prog-labs-2/rgz/database.db')
+    conn.row_factory = sqlite3.Row 
     cur = conn.cursor()
     return conn, cur
 
-# Функция для получения сотрудников
-def get_employees(page=1, per_page=20):
-    conn, cur = db_connect()
-    start = (page - 1) * per_page
-    query = "SELECT * FROM employees ORDER BY id LIMIT ? OFFSET ?"
-    cur.execute(query, (per_page, start))
-    employees = cur.fetchall()
-    cur.close()
-    conn.close()
-    return employees
 
-# Добавление нового сотрудника
-def add_employee_to_db(name, position, gender, phone, email, start_date):
-    conn, cur = db_connect()
-    query = """INSERT INTO employees (name, position, gender, phone, email, start_date)
-               VALUES (?, ?, ?, ?, ?, ?)"""
-    cur.execute(query, (name, position, gender, phone, email, start_date))
-    conn.commit()
-    cur.close()
-    conn.close()
 
 @app.route("/")
 def index():
@@ -186,6 +166,3 @@ def add_user():
     conn.close()
     return render_template("add_user.html", users=users)
 
-# Главная точка входа
-if __name__ == "__main__":
-    app.run(debug=True)
