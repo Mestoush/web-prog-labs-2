@@ -7,12 +7,6 @@ from os import path
 
 lab7 = Blueprint('lab7', __name__)
 
-
-@lab7.route('/lab7/')
-def lab62():
-    login = session.get('login', 'Аноним')
-    return render_template('lab7/lab7.html', login=login)
-
 films = [
     {
         'title': 'The Shawshank Redemption',
@@ -35,6 +29,12 @@ films = [
         'description': 'История жизни мужчины с низким IQ, который становится свидетелем и участником ключевых событий американской истории.'
     }
 ]
+
+@lab7.route('/lab7/')
+def lab62():
+    login = session.get('login', 'Аноним')
+    return render_template('lab7/index.html', login=login)
+
 
 @lab7.route('/lab7/rest-api/films/', methods = ['GET'])
 def get_films():
