@@ -8,16 +8,6 @@ from os import path
 lab7 = Blueprint('lab7', __name__)
 
 
-def db_connect():
-    conn = psycopg2.connect(
-        host='127.0.0.1',
-        database='denis_chervonyak_knowledge_base',
-        user='denis_chervonyak_knowledge_base',
-        password='123'
-    )
-    cur = conn.cursor(cursor_factory=RealDictCursor)
-    return conn, cur
-
 @lab7.route('/lab7/')
 def lab62():
     login = session.get('login', 'Аноним')
@@ -56,3 +46,10 @@ def get_film(id):
         abort(404)
     
     return films[id]
+
+@lab7.route('/lab7/rest-api/films/<int:id>', methods = ['DELETE'])
+def del_film():
+    if id < 0 or id >= len(films):
+        abort(404)
+    del films[id]
+    return "", 204
