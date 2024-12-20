@@ -19,6 +19,9 @@ function fillFilmList() {
 
             let editButton = document.createElement('button');
             editButton.innerText = 'редактировать';
+            editButton.onclick = function() {
+                editFilm(i);
+            };
             let delButton = document.createElement('button');
             delButton.innerText = 'удалить';
             delButton.onclick = function() {
@@ -91,5 +94,21 @@ function sendFilm() {
     .then(function() {
         fillFilmList();
         hideModal();
+    })
+}
+
+function editFilm(id) {
+    fetch (`/lab7/rest-api/films/${id}`)
+    .then (function(data){
+        return data.json();
+    })
+    .then (function (film){
+        document.getElementById('id').value = id;
+        document.getElementById('title').value = film.title || '';
+        document.getElementById('title_ru').value = film.title_ru || '';
+        document.getElementById('year').value = film.year || '';
+        document.getElementById('description').value = film.description || '';
+
+        showModal();
     })
 }
