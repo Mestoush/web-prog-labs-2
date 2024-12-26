@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block lab %} Лабораторная работа 8 {% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block styles %}
+<style>
+    .article {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    .article h2 {
+        margin: 0;
+    }
+    .article p {
+        margin: 5px 0;
+    }
+</style>
+{% endblock %}
+
+{% block main %} 
+<h1>Список статей</h1>
+
+{% if current_user.is_authenticated %}
+    <p>Добро пожаловать, {{ current_user.login }}!</p>
+{% else %}
+    <p>Вы не авторизованы. Показаны только публичные статьи.</p>
+{% endif %}
+
+<ul>
+    {% for article in articles %}
+        <li>
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.article_text }}</p>
+            <p>Автор: {{ article.login_id }}</p>
+        </li>
+    {% endfor %}
+</ul>
+
+{% if not articles %}
+    <p>Статей пока нет.</p>
+{% endif %}
+
+{% endblock %}

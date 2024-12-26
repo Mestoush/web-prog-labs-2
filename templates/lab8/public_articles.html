@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<h1>Публичные статьи</h1>
+<ul>
+    {% for article in articles %}
+        <li>
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.article_text }}</p>
+            <p>Автор: {{ article.login_id }}</p>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

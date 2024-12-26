@@ -21,6 +21,11 @@
     nav ul li a {
         text-decoration: none;
         color: #007bff;
+        border: 1px solid;
+        border-radius: 5px;
+        border-color: bisque;
+        background-color: blanchedalmond;
+        padding: 3px;
     }
     nav ul li a:hover {
         text-decoration: underline;
@@ -42,11 +47,19 @@
             <li><a href="/lab8/register">Регистрация</a></li>
             <li><a href="/lab8/articles">Список статей</a></li>
             <li><a href="/lab8/create">Создать статью</a></li>
+            <li><a href="/lab8/public_articles">Публичные статьи</a></li>
+
         </ul>
     </nav>
     <div class="username">
-        Имя пользователя: {{ login }}
+        {% if current_user.is_authenticated %}
+            <p>Добро пожаловать, {{ current_user.login }}!</p>
+        {% else %}
+            <p>Добро пожаловать, Аноним</p>
+        {% endif %}
     </div>
+
+    <a href="/lab8/logout">Выйти</a>
 </div>
 
 {% endblock %}

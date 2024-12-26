@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block lab %} Лабораторная работа 8 {% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block main %} 
+
+<form action="/lab8/create" method="post">
+    <div>
+        <label>Заголовок: <input type="text" name="title"></label>
+    </div>
+    <div>
+        <label>Текст статьи: <textarea name="article_text"></textarea></label>
+    </div>
+    <button type="submit">Создать</button>
+    <div>
+        <label for="is_public">
+            <input type="checkbox" id="is_public" name="is_public">
+            Сделать статью публичной
+        </label>
+    </div>
+</form>
+
+
+{% endblock %}
