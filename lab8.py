@@ -14,7 +14,7 @@ def db_connect():
     cur = conn.cursor(cursor_factory=RealDictCursor)
     return conn, cur
 
-@lab8.route('/lab7/')
-def lab62():
+@lab8.route('/lab8/')
+def lab82():
     login = session.get('login', 'Аноним')
     return render_template('lab8/lab8.html', login=login)
