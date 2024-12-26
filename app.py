@@ -93,6 +93,7 @@ def menu():
                 <li><a href="/lab6" target="_blank">Лабораторная 6</a></li>
                 <li><a href="/lab7" target="_blank">Лабораторная 7</a></li>
                 <li><a href="/lab8" target="_blank">Лабораторная 8</a></li>
+                <li><a href="/lab9" target="_blank">Лабораторная9</a></li>
             </ul>
         </nav>
     </main>

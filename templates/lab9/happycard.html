@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block lab %} Лабораторная работа 9 {% endblock %}
+
+{% block styles %} 
+<style>
+    body {
+        background-color: #f2f8ff;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+    
+    .greeting-container {
+        text-align: center;
+        padding: 50px;
+        background: #007206;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .greeting-header {
+        font-size: 2.5em;
+        color: #ffa7a7;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .greeting-text {
+        font-size: 1.2em;
+        color: #ffffff;
+        margin: 20px 0;
+    }
+    
+    .gift-section {
+        margin-top: 30px;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .gift-text {
+        font-size: 1.5em;
+        color: #d44d4d;
+        margin-bottom: 20px;
+    }
+    
+    .gift-img {
+        width: 600px;
+        height: auto;
+        margin-top: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .snowflakes {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%; 
+        height: 100%;
+        pointer-events: none; 
+    }
+    
+    .snowflake {
+        position: absolute;
+        top: -10px; 
+        width: 10px; 
+        height: 10px; 
+        background-color: white;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: snowfall 10s linear infinite;
+    }
+    
+    @keyframes snowfall {
+        to {
+            transform: translateY(100vh); 
+        }
+    }
+    
+    .snowflake:nth-child(1) {
+        left: 10%;
+        animation-duration: 8s;
+    }
+    .snowflake:nth-child(2) {
+        left: 20%;
+        animation-duration: 9s;
+    }
+    .snowflake:nth-child(3) {
+        left: 30%;
+        animation-duration: 7s;
+    }
+    .snowflake:nth-child(4) {
+        left: 40%;
+        animation-duration: 10s;
+    }
+    .snowflake:nth-child(5) {
+        left: 50%;
+        animation-duration: 6s;
+    }
+    .snowflake:nth-child(6) {
+        left: 60%;
+        animation-duration: 8s;
+    }
+    .snowflake:nth-child(7) {
+        left: 70%;
+        animation-duration: 7s;
+    }
+    .snowflake:nth-child(8) {
+        left: 80%;
+        animation-duration: 9s;
+    }
+    .snowflake:nth-child(9) {
+        left: 90%;
+        animation-duration: 6s;
+    }
+    .snowflake:nth-child(10) {
+        left: 100%;
+        animation-duration: 8s;
+    }
+</style>
+{% endblock %}
+
+{% block main %} 
+<div class="greeting-container">
+    <h1 class="greeting-header">Поздравляем, {{ user_data['name'] }}!</h1>
+    <p class="greeting-text">
+        {% if user_data['gender'] == 'male' %}
+        Желаю побольше денег и чтобы ты был умным и счастливым!
+        {% else %}
+        Желаю побольше денег и чтобы ты была умной и счастливой!
+        {% endif %}
+    </p>
+
+    <div class="gift-section">
+        <p class="gift-text">
+            {% if user_data['gender'] == 'male' and user_data['age'] < 18 %}
+            Уверен, что сегодня тебе подарят вот эту игрушку!
+            <br>
+            <img src="{{ url_for('static', filename='images/toy_car.jpg') }}" alt="машинка" class="gift-img">
+            {% elif user_data['choice2'] == 'merc' %}
+            Уверен, что в будущем тебя будет катать эта машина!
+            <br>
+            <img src="{{ url_for('static', filename='images/mercedes_s_class.jpg') }}" alt="Мерседес" class="gift-img">
+            {% elif user_data['choice2'] == 'bmw' %}
+            Уверен, что в будущем тебя будет катать эта машина!
+            <br>
+            <img src="{{ url_for('static', filename='images/bmw_m5.jpg') }}" alt="БМВ" class="gift-img">
+            {% elif user_data['choice2'] == 'audi' %}
+            Уверен, что в будущем тебя будет катать эта машина!
+            <br>
+            <img src="{{ url_for('static', filename='images/audi_r8.jpg') }}" alt="Ауди" class="gift-img">
+            {% elif user_data['choice2'] == 'rom' %}
+            Желаю, чтобы у тебя дома всегда стоял такой букет!
+            <br>
+            <img src="{{ url_for('static', filename='images/rom.jpg') }}" alt="Ромашки" class="gift-img">
+            {% elif user_data['choice2'] == 'pion' %}
+            Желаю, чтобы у тебя дома всегда стоял такой букет!
+            <br>
+            <img src="{{ url_for('static', filename='images/pion.jpg') }}" alt="Пионы" class="gift-img">
+            {% else %}
+            Желаю, чтобы у тебя дома всегда стоял такой букет!
+            <br>
+            <img src="{{ url_for('static', filename='images/rose.jpg') }}" alt="Розы" class="gift-img">
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="snowflakes">
+        <div class="snowflake">❄️</div>
+        <div class="snowflake">❄️</div>
+        <div class="snowflake">❄️</div>
+        <div class="snowflake">❄️</div>
+        <div class="snowflake">❄️</div>
+        <div class="snowflake">❄️</div>
+        <div class="snowflake">❄️</div>
+        <div class="snowflake">❄️</div>
+        <div class="snowflake">❄️</div>
+        <div class="snowflake">❄️</div>
+    </div>
+</div>
+
+{% endblock %}

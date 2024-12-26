@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block lab %} Лабораторная работа 9 {% endblock %}
+
+{% block script %} 
+
+{% endblock %}
+
+{% block main %} 
+    
+    <h2>Что вы бы выбрали?</h2>
+    <form method="POST">
+        {% if choice1 == 'cars' %}
+        <button type="submit" name="choice2" value="merc">Мерседес</button>
+        <button type="submit" name="choice2" value="bmw">Бмв</button>
+        <button type="submit" name="choice2" value="audi">Ауди</button>
+        {% else %}
+        <button type="submit" name="choice2" value="rom">Ромашки</button>
+        <button type="submit" name="choice2" value="pion">Пионы</button>
+        <button type="submit" name="choice2" value="rose">Розы</button>
+        {% endif %}
+    </form>
+
+{% endblock %}
